@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="main.css">
+	<script src="index.js"></script>
+</head>
+<body>
+	<section id="leftbox">
+		<form>
+			<p>(key) One: <input type="text" id="one"></p>
+			<p>(value) Two: <textarea id="two"></textarea></p>
+			<p><input type="button" id="button" value="Save"></p>
+		</form>
+	</section>
+	<section id="rightbox">
+		
+	</section>
+</body>
+</html>
+
+                                              CSS File
+                                              
+#leftbox{
+	float: left;
+	padding: 20px;
+	border: 3px solid black;
+}
+#rightbox{
+	float:left;
+	width: 250px;
+	margin-left: 20px;
+	padding: 20px;
+	border: 3px solid blue;
+}
+
+                                               JS File
+
+function doFirst() {
+	var button = document.getElementById("button");
+	button.addEventListener("click", saveCrap, false);
+	display();
+}
+function saveCrap() {
+	var one = document.getElementById("one").value;
+	var two = document.getElementById("two").value;
+	sessionStorage.setItem(one, two);
+	document.getElementById("one").value = "";
+	document.getElementById("two").value = "";
+
+	display();
+}
+function display() {
+	var rightbox = document.getElementById("rightbox");
+	
+	for(var i=0; i<sessionStorage.length; i++){
+		var a = sessionStorage.key(i);
+		var b = sessionStorage.getItem(a);
+		rightbox.innerHTML += a + " - " + b + "<br />";
+	}
+}
+
+window.addEventListener("load", doFirst, false);
