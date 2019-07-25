@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>website</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+	<div id="wrapper">
+		<header id="top_header">
+			<h1>Welcome to the world of koka!</h1>
+		</header>
+
+		<nav id="top_menu">
+			<ul>
+				<li>Rap God</li>
+				<li>Chess</li>
+				<li>Table Tennis</li>
+				<li>Cricket</li>
+				<li>Badminton</li>
+				<li>Guitar</li>
+				<li>Bike Rider</li>
+				<li>Author</li>
+				<li>Interior Designer</li>
+			</ul>
+		</nav>
+
+		<div id="new_div">
+
+		<section id="main_section">
+			<article>
+				<header>
+					<hgroup>
+						<h1>Struggle</h1>
+						<h2>A story origined on 2017 Jan 25</h2>
+					</hgroup>
+
+					<p>A worth reading story</p>
+
+					<footer>
+						written by pavan koka
+					</footer>
+				</header>
+			</article>
+		</section>
+
+		<aside id="side_news">
+			<h4>News</h4>
+			"I Quit" is something that haunts!
+		</aside>
+
+		</div>
+
+		<footer id="the_footer">
+			Copyright, atlease don't copy my life!
+		</footer>
+	</div>
+</body>
+
+
+</html>
