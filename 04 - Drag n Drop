@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="main.css">
+	<script src="index.js"></script>
+</head>
+<body>
+	<!--
+	<section id="main">
+		<canvas id="canvas" width="600" height="400">
+			we should'nt see this!
+		</canvas>
+	</section> -->
+				
+	<section id="leftbox">
+		i dare not!
+	</section>
+
+	<section id="rightbox">
+		<img id ="cute_pic" src="pic.jpg" width="100" height="100">
+	</section>
+
+</body>
+</html>
+
+                                                          CSS File
+
+#leftbox{
+	float: left;
+	width: 250px;
+	height: 250px;
+	margin: 50px;
+	border: 3px solid blue;
+}
+#rightbox{
+	float: left;
+	width: 250px;
+	height: 250px;
+	margin: 50px;
+	border: 3px solid green;
+}
+
+                                                           JS File
+
+function doFirst(){
+	var x = document.getElementById('canvas');
+	canvas = x.getContext('2d');
+
+/*	canvas.fillStyle = "blue";
+	canvas.strokeStyle = "red";
+	canvas.strokeRect(10,10,50,100);
+	canvas.fillRect(10,120,50,100);
+	canvas.clearRect(20,140,20,40);
+
+	var g = canvas.createLinearGradient(0,0,100,100);
+	g.addColorStop(.0, "blue");
+	g.addColorStop(.5, "green");
+	g.addColorStop(1, "red");
+	canvas.fillStyle = g;
+	canvas.fillRect(0, 0, 100, 100);
+*/
+/*	canvas.beginPath();
+	canvas.moveTo(50, 50);
+	canvas.lineTo(70,250);
+	canvas.lineTo(300,200);
+	canvas.closePath();
+	canvas.stroke();
+*/
+
+/*	canvas.shadowOffsetX = 4;
+	canvas.shadowOffsetY = 4;
+	canvas.shadowBlur = 6;
+	canvas.shadowColor = 'rgba(0,0,255,0.5)';
+
+	canvas.font = "bold 32px Tahoma";
+//	canvas.textAlign = "end";
+	canvas.fillText("Hey that's working", 100, 100);
+*/
+
+/*	canvas.font = "bold 22px Tamoha";
+	canvas.textAlign = "start";
+	canvas.fillText("start", 10, 30);
+
+	canvas.translate(100,150);
+	canvas.fillText("after translation", 0, 0);
+
+	canvas.rotate(1);
+	canvas.fillText("after rotation", 0, 0);
+
+	canvas.scale(1.5,2);
+	canvas.fillText("after scaling", 0, 20);
+	//X & Y axis too change
+*/
+
+/*	canvas.font = "bold 22px Tamoha";
+	canvas.textAlign = "start";
+	canvas.save();
+	// saves the state here
+
+	canvas.fillText("start", 10, 30);
+
+	canvas.translate(100,150);
+	canvas.fillText("after translation", 0, 0);
+
+	canvas.rotate(1);
+	canvas.fillText("after rotation", 0, 0);
+
+	canvas.scale(1.5,2);
+	canvas.fillText("after scaling", 0, 20);
+
+	canvas.restore();
+	canvas.fillText("after restoring", 10, 30);
+	// restores from the saved place
+	
+*/
+	var pic = new Image();
+	pic.src = "pic.jpg";
+	pic.addEventListener("load", function() {canvas.drawImage(pic, 0, 0, x.width, x.height)}, false);
+
+	window.addEventListener("mousemove", koka, false);	
+}
+function koka(e) {
+	canvas.clearRect(0, 0, 600, 400);
+	var xPos = e.clientX;
+	var yPos = e.clientY;
+	canvas.fillRect(xPos-50, yPos-50, 100, 100);
+}
+
+
+function doSecond() {
+	pic = document.getElementById('cute_pic');
+	pic.addEventListener("dragstart", startDrag, false);
+	pic.addEventListener("dragend", endDrag, false);
+	leftbox = document.getElementById('leftbox');
+	rightbox = document.getElementById('rightbox');
+	leftbox.addEventListener("dragenter", dragEnter, false);
+	leftbox.addEventListener("dragleave", dragLeave, false);
+	leftbox.addEventListener("dragover", function(e){e.preventDefault()}, false);
+	leftbox.addEventListener("drop", dropped, false);
+}
+function endDrag(e) {
+	pic = e.target;
+	pic.style.visibility = 'hidden';
+}
+
+function dragEnter(e) {
+	e.preventDefault();
+	leftbox.style.background = "SkyBlue";
+	leftbox.style.border = "3px solid red";
+}
+function dragLeave(e) {
+	e.preventDefault();
+	leftbox.style.background = "White";
+	leftbox.style.border = "3px solid blue";
+}
+function startDrag(e) {
+	var code = '<img src="pic.jpg" width="100" height="100">';
+	e.dataTransfer.setData('Text', code);
+}
+function dropped(e) {
+	e.preventDefault();
+	leftbox.innerHTML = e.dataTransfer.getData('Text');
+//	rightbox.innerHTML = "nothing!";
+}
+//window.addEventListener("load", doFirst, false);
+window.addEventListener("load", doSecond, false);
