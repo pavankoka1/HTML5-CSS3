@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="main.css">
+	<script src="koka.js"></script>
+</head>
+
+<body style = "background-color: #211919">
+	<section id="skin">
+		<video id="myMovie" width="640" height="360" poster="pic.jpg" autoplay="">
+			<source src="song.mp4">
+		</video>
+		<nav>
+			<div id="buttons">
+				<button type="button" id="playButton">Pause</button>
+			</div>
+			<div id="defaultBar">
+				<div id="progressBar"></div>
+			</div>
+			<div style="clear:both;"></div>
+		</nav>
+	</section>
+</body>
+</html>
+
+<!-- <video src="song.mp4" poster="pic.jpg" autoplay loop="" controls="" width="640" height="360"></video> -->
+
+                                        
+                                        CSS FILE
+
+body{
+	text-align: center;
+}
+header, section, footer, aside, nav, article, hgroup{
+	display: block;
+}
+#skin{
+	width: 700px;
+	margin: 10px auto;
+	padding: 5px;
+	background: #983F3F;
+	border: 10px white;
+	border-radius: 10px;
+}
+nav{
+	margin: 5px 0;
+}
+#buttons{
+	float: left;
+	width: 70px;
+	height: 22px;
+}
+#defaultBar{
+	position: relative;
+	float: left;
+	width: 600px;
+	height: 16px;
+	padding: 4px;
+	border: 0.5px solid black;
+	background: #CEA7A7;
+	margin-left: 10px;
+}
+#progressBar{
+	position: absolute;
+	width: 0px;
+	height: 16px;
+	background: black;
+}
+
+                                              JS File
+
+/*
+function getStuff(){
+	var list = document.querySelectorAll('#tuna');
+	for(var i=0; i<list.length; i++)
+		list[i].onclick = talk;
+}
+function talk(){
+	alert('did u press something?');
+}
+window.onload = getStuff;
+*/
+function doFirst(){
+	barSize = 600;
+	myMovie = document.getElementById('myMovie');
+	playButton = document.getElementById('playButton');
+	bar = document.getElementById('defaultBar');
+	progressBar = document.getElementById('progressBar');
+
+	updateBar = setInterval(update, 100);
+	playButton.addEventListener('click', playOrPause, false);
+	bar.addEventListener('click', clickedBar, false);
+}
+
+function playOrPause(){
+	if(!myMovie.paused && !myMovie.ended){
+		myMovie.pause();
+		playButton.innerHTML = 'Play';
+		window.clearInterval(updateBar);
+	}else{
+		myMovie.play();
+		playButton.innerHTML = 'Pause';
+		updateBar = setInterval(update, 10);
+	}
+}
+
+function update(){
+	if(!myMovie.ended){
+		var size = parseInt(myMovie.currentTime*barSize/myMovie.duration);
+		progressBar.style.width = size + 'px';
+	}else{
+		progressBar.style.width = '0px';
+		playButton.innerHTML = 'Play';
+		window.clearInterval(updateBar);
+	}
+}
+
+function clickedBar(e) {
+
+	if(myMovie.paused && !myMovie.ended){
+		var mouseX = e.pageX-bar.offsetLeft;
+		var newTime = mouseX*myMovie.duration/barSize;
+		myMovie.currentTime = newTime;
+		progressBar.style.width = mouseX + 'px';
+
+	}
+
+	if(!myMovie.paused && !myMovie.ended){
+		var mouseX = e.pageX-bar.offsetLeft;
+		var newTime = mouseX*myMovie.duration/barSize;
+		myMovie.currentTime = newTime;
+		progressBar.style.width = mouseX + 'px';
+
+	}
+}
+
+window.addEventListener('load', doFirst, false);
